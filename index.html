@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            cursor: none;
+            user-select: none;
+        }
+        #tir{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #pritsel{
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            z-index: 9;
+            pointer-events: none;
+        }
+        .polka{
+            height: 100px;
+            background-color: rgb(201, 161, 0);
+            border-bottom:10px solid rgb(211, 138, 2);
+        }
+        .polka img{
+            position: relative;
+            width: 200px;
+            bottom: 130%;
+            transition: 1s;
+        }
+        p{
+            font-size: 30px;
+            font-weight: 800;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin-top: 30px;
+        }
+        #teshu{
+            position: absolute !important;
+            width: 160px;
+            height: 160px;
+            pointer-events: none;
+        }
+        .none{
+            transform: translateY(500%) rotate(400deg);
+        }
+    </style>
+</head>
+<body>
+
+    <img id="pritsel" src="./scope_PNG13033.png" alt="">
+    
+    <div id="tir">
+        <div class="polka">
+            <img src="./239963735.png" alt="" id="img1">
+            <img src="./239963735.png" alt="" id="img2">
+            <img src="./239963735.png" alt="" id="img3">
+            <img src="./239963735.png" alt="" id="img4">
+        </div>
+        <p><span id="out">0</span> BALL</p>
+    </div>
+
+    <script>
+        let audio = new Audio();
+        const pritsel = document.getElementById("pritsel");
+        const tir = document.getElementById("tir");
+        const ball = document.getElementById("out");
+        let out = 0;
+
+        window.onmousemove = function(event){
+            pritsel.style.top = `${event.clientY - 24}px`;
+            pritsel.style.left = `${event.clientX - 24}px`;
+        }
+
+        tir.onclick = function(event){
+            if(event.target.nodeName === "IMG"){
+                audio.src = "zvuk-rezinovoy-puli-po-konservnoy-banke.mp3";
+                audio.play();
+                out++;
+                ball.innerHTML = out;
+                document.getElementById(event.target.id).classList.add("none");
+            }else{
+                audio.src = "2c83b561e941786.mp3";
+                audio.play();
+                tir.innerHTML += `<img src="bullet_hole_PNG6062.png" style="top:${event.clientY - 80}px;left:${event.clientX - 80}px;" id="teshu">`
+            }
+        }
+    </script>
+</body>
+</html>
